@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Maxwell Khavari – AI & Fairness Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --stanford-red: #8c1515;
+            --light-gray: #f9f9f9;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #333;
+            --text-color: #444;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            background: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--stanford-red);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0;
+            font-weight: 300;
+        }
+
+        header img {
+            max-width: 150px;
+            border-radius: 50%; /* Make it circular for a softer look */
+            border: 5px solid white;
+            margin-top: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 0 1.5rem;
+            max-width: 960px; /* Slightly wider for more content */
+            margin: auto;
+        }
+
+        section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--stanford-red);
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--medium-gray);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--dark-gray);
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .projects a, .cta-button {
+            display: block;
+            margin: 1rem 0;
+            padding: 0.8rem 1.5rem;
+            background: var(--stanford-red);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .projects a:hover, .cta-button:hover {
+            background: #a82424; /* Slightly darker red */
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .projects a.github-link {
+            background: #444;
+            color: white;
+        }
+        .projects a.github-link:hover {
+            background: #666;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            font-size: 0.9em;
+            color: #777;
+            background: var(--medium-gray);
+        }
+
+        footer a {
+            color: var(--stanford-red);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--stanford-red);
+        }
+
+        .status-update {
+            background-color: #fff3cd; /* Light yellow for status updates */
+            border-left: 5px solid #ffc107; /* Orange border */
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            color: #664d03;
+            font-style: italic;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            h3 {
+                font-size: 1.3rem;
+            }
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Stanford_University_seal_2003.svg/1200px-Stanford_University_seal_2003.svg.png" alt="Stanford University Logo">
+        <h1>Maxwell Khavari</h1>
+        <p>Researcher • Developer • AI Fairness Advocate</p>
+    </header>
+
+    <div class="container">
+
+        <section>
+            <h2>About My Work</h2>
+            <p>
+                My core focus is on understanding and actively addressing algorithmic bias in AI systems — particularly within
+                text-to-image generation and classification models. It's crucial work because these powerful systems, if left
+                unchecked, can inadvertently reinforce harmful stereotypes. My goal is to ensure they become fairer and
+                more representative of our diverse world.
+            </p>
+            <p>
+                My current research delves into how race, gender, and socioeconomic status are represented in AI-generated
+                imagery and within classification tasks. I'm developing methods to reverse-engineer prompts and model decisions,
+                allowing us to thoroughly audit and improve AI fairness.
+            </p>
+        </section>
+
+        <section>
+            <h2>Current Project: Algorithmic Bias Progression Over Time</h2>
+
+            <h3>The Problem & Opportunity</h3>
+            <ul>
+                <li>
+                    **Persistent Algorithmic Bias:** Text-to-image AIs generate biased visuals (e.g., for professions, leadership)
+                    even from neutral prompts (e.g., "CEO," "nurse," "leader").
+                    These biases stem from vast, real-world datasets that unfortunately carry existing societal biases related to race, gender, status, and intelligence.
+                </li>
+                <li>
+                    **Temporal Blind Spot:** There's a significant gap in understanding how these biases **persist and significantly change over time** across different model versions.
+                </li>
+                <li>
+                    **Bias Injection at the Source:** A critical observation is that language models (like GPT) can introduce bias during prompt reconstruction, *before* the image is generated.
+                </li>
+                <li>
+                    **Overlooked Human Perception:** Critically, the concept of "bias" isn't uniformly perceived. What an algorithm deems neutral, or what one group finds subtly biased, another might experience as overtly offensive. Relying solely on technical metrics misses this vital human dimension of fairness.
+                </li>
+            </ul>
+
+            <h3>Our Core Hypothesis</h3>
+            <p>
+                Text-to-image models exhibit biases related to socioeconomic status, intelligence, occupational prestige, or leadership, which <span class="highlight">persist and significantly change over time</span>, even when prompts do not explicitly mention gender or race. Furthermore, the human perception and interpretation of these algorithmic biases vary significantly across evaluators from diverse racial and gender backgrounds, revealing distinct subjective experiences of algorithmic fairness.
+            </p>
+
+            <h3>Project Goals</h3>
+            <ul>
+                <li>Quantify the percentage change in gender and racial representation for specific prompts across different model versions over time.</li>
+                <li>Identify and document distinct patterns of algorithmic bias progression (e.g., increasing, decreasing, stable).</li>
+                <li>**Quantify the variance in bias perception among human evaluators, demonstrating statistically significant differences based on their racial and gender backgrounds.**</li>
+                <li>Generate a robust dataset of over 10,000 images, complete with algorithmic bias metrics and human perception ratings, and make it publicly available.</li>
+            </ul>
+
+            <div class="status-update">
+                <p>
+                    **Current Status Update:** I'm happy to report that I have most of the automation code and analysis code for the dataset complete. All I need to do is adjust the locators for different models and tweak small parts of it. This means we're in a strong position to generate the data and start the analysis very soon! The groundwork for the human perception study will build directly on these generated images.
+                </p>
+            </div>
+
+            <a href="INSERT LINK HERE" class="cta-button">View Full Project PRD (PDF/Document)</a>
+
+        </section>
+
+        <section>
+            <h2>Project Components & Methodology Highlights</h2>
+
+            <h3>Core Domains for Bias Analysis ("Rule of 3")</h3>
+            <ul>
+                <li>**Medical & Healthcare Professions:** Examining roles like "nurse," "surgeon," "paramedic" for intersectional bias (prestige, gender coding, racial representation).</li>
+                <li>**Patients & Students:** Analyzing depictions of roles often visualized with infantilizing, racialized, or stereotypically passive attributes.</li>
+                <li>**Power, Visibility, & Cultural Authority:** Focusing on who appears as leaders, "influencers," "experts," and "icons," probing the sociotechnical biases.</li>
+            </ul>
+
+            <h3>Models Under Evaluation</h3>
+            <ul>
+                <li>GPT-4o, GPT-4o mini, GPT-4.1 (future release)</li>
+                <li>Stable Diffusion</li>
+                <li>Midjourney</li>
+                <li>Gemini/Imagen</li>
+                <li>DeepAI</li>
+            </ul>
+
+            <h3>Key Analysis Methods</h3>
+            <ul>
+                <li>**Automated Image Generation:** Using "playwright" (Node.js library) to automate generation of 14 prompts, repeated 1008 times, for a large dataset.</li>
+                <li>**Automated Bias Analysis:** Using FairFace and/or DeepFace for gender/race/age analysis, calculating proportions, and visualizing trends (Python, Pandas, Seaborn).</li>
+                <li>**Human Perception Analysis:** Collecting diverse human judgments on perceived bias to quantify subjective experiences.</li>
+                <li>**Direct Bias Evidence (Tier 1):** Capturing visible prompt reconstructions from GPT/DALL-E, and using Stable Diffusion's "Interrogate CLIP" to compare input vs. internal interpretation.</li>
+                <li>**Reverse-Engineering Analysis (Tier 2):** Using standalone CLIP Interrogator tools for Midjourney, Gemini/Imagen, DeepAI, and cross-validating with alternative image-to-text models (BLIP-2, InstructBLIP).</li>
+            </ul>
+
+            <h3>Expected Impact</h3>
+            <ul>
+                <li>Provides a crucial benchmark dataset and analysis framework for future fairness research in image/video generation.</li>
+                <li>Offers a clear, data-driven picture of how bias has evolved (or persisted) in popular generative models.</li>
+                <li>Provides actionable findings for AI developers, regulators, and users to guide the creation of truly safer, more inclusive tools.</li>
+                <li>**Guides the development of fine-tuned models capable of generating images that reflect real-world demographic percentages (e.g., for gender, race) in various contexts.**</li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>My GitHub Repositories</h2>
+            <div class="projects">
+                <a href="INSERT LINK HERE" class="github-link">Algorithmic Bias Progression Over Time (Main Project)</a>
+                <a href="INSERT LINK HERE">🧠 Race & Gender Tagger</a>
+                <a href="INSERT LINK HERE">🖼️ CLIP FairFace Prompt Rebuilder</a>
+                <a href="INSERT LINK HERE">⚖️ AI Bias Detection Playground</a>
+                <a href="INSERT LINK HERE">Project Alpha: Automated Prompt Generation</a>
+                <a href="INSERT LINK HERE">Tool Beta: Image Similarity Analyzer</a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        &copy; 2025 Maxwell Khavari • <a href="INSERT LINK HERE" style="color:var(--stanford-red);">GitHub Profile</a>
+        <br>
+        <small>Summer Internship at BMDS</small>
+    </footer>
+
+</body>
+</html>
