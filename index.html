@@ -733,42 +733,37 @@
             }
         }
 
-        // --- JavaScript for Bouncing Words and Settling ---
+        // --- JavaScript for Bouncing Words and Settling into Blur ---
         document.addEventListener('DOMContentLoaded', () => {
             createParticles(); // Initialize background particles
 
-            // Elements that will have their words animated
             const animatableTextSelectors = 'p, h1, h2, h3, ul li';
             const textElements = document.querySelectorAll(animatableTextSelectors);
-            const wordDetails = []; // Stores details for each word particle
+            const wordDetails = [];
             
-            // Define animation durations
             const BOUNCE_DURATION = 3000; // milliseconds for the random bounce phase
             const SETTLE_DURATION = 1500; // milliseconds for words to settle into place
+            const FINAL_BLUR_AMOUNT = 20; // Pixels of blur for illegible text
+            const FINAL_OPACITY_AMOUNT = 0.5; // Final opacity (can be 1 for blurry but solid, or lower to fade)
 
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
 
-            // Step 1: Prepare elements and calculate final positions
             textElements.forEach(element => {
-                // To handle nested elements like <strong> or <span class="highlight">
                 const originalInnerHTML = element.innerHTML;
                 let tempContent = originalInnerHTML;
 
-                // Replace <strong/highlight> tags with a unique placeholder to split words correctly
                 tempContent = tempContent.replace(/<strong>(.*?)<\/strong>/g, (match, p1) => `!!STRONG_START!!${p1}!!STRONG_END!!`);
                 tempContent = tempContent.replace(/<span class="highlight">(.*?)<\/span>/g, (match, p1) => `!!HIGHLIGHT_START!!${p1}!!HIGHLIGHT_END!!`);
                 tempContent = tempContent.replace(/<em>(.*?)<\/em>/g, (match, p1) => `!!EM_START!!${p1}!!EM_END!!`);
 
-                // Split words by spaces, but keep the placeholders intact
                 const words = tempContent.split(/\s+/).filter(word => word.trim() !== '');
 
-                // Create a temporary container to measure word positions without affecting the main layout
                 const tempMeasurer = document.createElement('div');
                 tempMeasurer.style.position = 'absolute';
                 tempMeasurer.style.visibility = 'hidden';
                 tempMeasurer.style.pointerEvents = 'none';
-                tempMeasurer.style.width = getComputedStyle(element).width; // Important for correct line wrapping
+                tempMeasurer.style.width = getComputedStyle(element).width;
                 tempMeasurer.style.fontFamily = getComputedStyle(element).fontFamily;
                 tempMeasurer.style.fontSize = getComputedStyle(element).fontSize;
                 tempMeasurer.style.fontWeight = getComputedStyle(element).fontWeight;
@@ -780,8 +775,6 @@
                 tempMeasurer.style.border = getComputedStyle(element).border;
                 tempMeasurer.style.boxSizing = getComputedStyle(element).boxSizing;
 
-
-                // Ensure block elements take space for correct measuring
                 if (getComputedStyle(element).display.includes('block')) {
                     tempMeasurer.style.display = 'block';
                 } else {
@@ -790,10 +783,8 @@
 
                 document.body.appendChild(tempMeasurer);
 
-                // Create a container that will hold the absolutely positioned word spans
                 const wordContainer = document.createElement('div');
                 wordContainer.className = 'word-container';
-                // Copy all computed styles that affect layout and font
                 const computedStyle = getComputedStyle(element);
                 for (let i = 0; i < computedStyle.length; i++) {
                     const prop = computedStyle[i];
@@ -801,17 +792,12 @@
                         wordContainer.style[prop] = computedStyle[prop];
                     }
                 }
-                wordContainer.style.position = 'relative'; // Crucial for absolute word children
-                wordContainer.style.overflow = 'hidden'; // Hide words outside during bounce
-                wordContainer.style.color = 'transparent'; // Hide original text
+                wordContainer.style.position = 'relative';
+                wordContainer.style.overflow = 'hidden';
+                wordContainer.style.color = 'transparent';
 
-                element.parentNode.replaceChild(wordContainer, element); // Replace original element with container
-                element.style.visibility = 'hidden'; // Ensure original element is hidden
-
-                let currentLineHeight = parseFloat(getComputedStyle(element).lineHeight);
-                if (isNaN(currentLineHeight)) { // If 'normal', try to estimate
-                    currentLineHeight = parseFloat(getComputedStyle(element).fontSize) * 1.2;
-                }
+                element.parentNode.replaceChild(wordContainer, element);
+                element.style.visibility = 'hidden';
 
                 words.forEach((word, index) => {
                     let processedWord = word;
@@ -819,13 +805,12 @@
                     let isHighlight = false;
                     let isEm = false;
 
-                    // Restore tags and set flags
                     if (processedWord.includes('!!STRONG_START!!')) {
                         processedWord = processedWord.replace('!!STRONG_START!!', '').replace('!!STRONG_END!!', '');
                         isStrong = true;
                     }
                     if (processedWord.includes('!!HIGHLIGHT_START!!')) {
-                        processedWord = processedWord.replace('!!HIGHLIGHT_START!!', '').replace('!!HIGHLIGHT_END!!', '');
+                        processedWord = processed.replace('!!HIGHLIGHT_START!!', '').replace('!!HIGHLIGHT_END!!', '');
                         isHighlight = true;
                     }
                      if (processedWord.includes('!!EM_START!!')) {
@@ -833,16 +818,14 @@
                         isEm = true;
                     }
 
-                    // For measurement, use a span that reflects the style
                     const tempWordSpan = document.createElement('span');
-                    tempWordSpan.style.display = 'inline-block'; // Ensure it measures correctly
-                    tempWordSpan.style.whiteSpace = 'nowrap'; // Prevent breaking for measurement
-                    tempWordSpan.textContent = processedWord + (index < words.length - 1 ? ' ' : ''); // Add space back for measurement
+                    tempWordSpan.style.display = 'inline-block';
+                    tempWordSpan.style.whiteSpace = 'nowrap';
+                    tempWordSpan.textContent = processedWord + (index < words.length - 1 ? ' ' : '');
 
                     if (isStrong) tempWordSpan.style.fontWeight = 'bold';
-                    if (isHighlight) tempWordSpan.className = 'highlight-word'; // Just a class for highlighting
+                    if (isHighlight) tempWordSpan.className = 'highlight-word';
                     if (isEm) tempWordSpan.style.fontStyle = 'italic';
-
 
                     tempMeasurer.appendChild(tempWordSpan);
 
@@ -850,66 +833,58 @@
                     const containerRect = wordContainer.getBoundingClientRect();
 
                     wordDetails.push({
-                        originalElement: element, // Reference to original element
-                        wordContainer: wordContainer, // The new container for words
+                        originalElement: element,
+                        wordContainer: wordContainer,
                         text: processedWord,
-                        finalX: rect.left - containerRect.left, // Position relative to its container
+                        finalX: rect.left - containerRect.left,
                         finalY: rect.top - containerRect.top,
                         isStrong: isStrong,
                         isHighlight: isHighlight,
                         isEm: isEm,
-                        wordSpan: null // Placeholder for the actual word particle span
+                        wordSpan: null
                     });
 
-                    // Add a non-breaking space after each word in the measurer, except the last
-                    // This ensures correct line wrapping and spacing for subsequent words.
                     if (index < words.length - 1) {
                          tempMeasurer.appendChild(document.createTextNode(' '));
                     }
                 });
-                 document.body.removeChild(tempMeasurer); // Clean up the temporary measurer
+                 document.body.removeChild(tempMeasurer);
             });
 
-            // Step 2: Create actual word particle spans and place them randomly
             wordDetails.forEach(detail => {
                 const span = document.createElement('span');
                 span.className = 'word-particle';
-                span.textContent = detail.text; // Set text content
+                span.textContent = detail.text;
 
-                // Apply special styling if it was bold/highlight/italic
                 if (detail.isStrong) span.style.fontWeight = 'bold';
                 if (detail.isHighlight) span.classList.add('highlight-word');
                 if (detail.isEm) span.style.fontStyle = 'italic';
                 
-                // Set initial random position for the "bounce" phase
-                span.style.left = `${Math.random() * (viewportWidth * 1.5) - (viewportWidth * 0.25)}px`; // Wider range for initial scatter
-                span.style.top = `${Math.random() * (viewportHeight * 1.5) - (viewportHeight * 0.25)}px`; // Taller range for initial scatter
-                span.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg) scale(${Math.random() * 0.5 + 0.5})`; // Random rotation and scale
-                span.style.opacity = '0'; // Start invisible
-                span.style.filter = `blur(${Math.random() * 5 + 2}px)`; // Start with more blur
+                span.style.left = `${Math.random() * (viewportWidth * 1.5) - (viewportWidth * 0.25)}px`;
+                span.style.top = `${Math.random() * (viewportHeight * 1.5) - (viewportHeight * 0.25)}px`;
+                span.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg) scale(${Math.random() * 0.5 + 0.5})`;
+                span.style.opacity = '0';
+                span.style.filter = `blur(${Math.random() * 5 + 2}px)`;
 
-                document.body.appendChild(span); // Add to body for free movement
+                document.body.appendChild(span);
                 detail.wordSpan = span;
             });
 
-            // Step 3: Initiate the "bouncing" animation (random floating)
-            // A short delay before starting the random movement phase
             setTimeout(() => {
                 wordDetails.forEach(detail => {
                     const span = detail.wordSpan;
-                    const randomDelay = Math.random() * (BOUNCE_DURATION * 0.8); // Stagger start of bounce
+                    const randomDelay = Math.random() * (BOUNCE_DURATION * 0.8);
                     span.style.transition = `transform ${BOUNCE_DURATION / 1000}s ease-out ${randomDelay / 1000}s, opacity ${BOUNCE_DURATION / 1000}s ease-out ${randomDelay / 1000}s, filter ${BOUNCE_DURATION / 1000}s ease-out ${randomDelay / 1000}s`;
                     
-                    // Animate to another random position
                     span.style.left = `${Math.random() * (viewportWidth * 1.5) - (viewportWidth * 0.25)}px`;
                     span.style.top = `${Math.random() * (viewportHeight * 1.5) - (viewportHeight * 0.25)}px`;
                     span.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 720 - 360}deg) scale(${Math.random() * 0.5 + 0.8})`;
-                    span.style.opacity = Math.random() * 0.8 + 0.2; // Random opacity during bounce
+                    span.style.opacity = Math.random() * 0.8 + 0.2;
                     span.style.filter = `blur(${Math.random() * 3 + 1}px)`;
                 });
-            }, 100); // Give a small initial delay before moving
+            }, 100);
 
-            // Step 4: Initiate the "settling" animation
+            // Settle words into a blurry, illegible state
             setTimeout(() => {
                 wordDetails.forEach((detail, index) => {
                     const span = detail.wordSpan;
@@ -918,66 +893,28 @@
                     // Append the word span to its target container
                     wordContainer.appendChild(span);
 
-                    // Crucially, set position relative to the new parent
-                    const parentOffsetLeft = wordContainer.getBoundingClientRect().left;
-                    const parentOffsetTop = wordContainer.getBoundingClientRect().top;
-                    
-                    // Reset transition to ensure smooth settling from current position
-                    // Use a staggered delay for a more natural settle
-                    const settleDelay = (index * 20) + Math.random() * 200; // Small stagger per word + random
+                    const settleDelay = (index * 20) + Math.random() * 200;
                     span.style.transition = `transform ${SETTLE_DURATION / 1000}s var(--transition-ease) ${settleDelay / 1000}s, opacity ${SETTLE_DURATION / 1000}s var(--transition-ease) ${settleDelay / 1000}s, filter ${SETTLE_DURATION / 1000}s var(--transition-ease) ${settleDelay / 1000}s`;
                     
-                    // Animate to the final calculated position relative to its new parent
+                    // Animate to the final calculated position, but apply blur and chosen opacity
                     span.style.left = `${detail.finalX}px`;
                     span.style.top = `${detail.finalY}px`;
-                    span.style.transform = `translate(0, 0) rotate(0deg) scale(1)`; // Settle to no rotation/scale
-                    span.style.opacity = '1'; // Fully visible
-                    span.style.filter = 'blur(0px)'; // No blur
+                    span.style.transform = `translate(0, 0) rotate(0deg) scale(1)`; 
+                    span.style.opacity = `${FINAL_OPACITY_AMOUNT}`; // Final opacity
+                    span.style.filter = `blur(${FINAL_BLUR_AMOUNT}px)`; // Final blur amount
 
-                    // After the transition, revert to static positioning for proper text flow and selection
-                    span.addEventListener('transitionend', function handler() {
-                        span.style.position = 'static';
-                        span.style.transform = 'none'; // Remove transform to allow normal flow and sizing
-                        span.style.transition = 'none'; // Remove transition for normal operation
-                        // Re-apply highlight background if necessary (CSS might override 'color: inherit' if it's a gradient)
-                        if (detail.isHighlight) {
-                             span.style.background = 'var(--gradient-text)';
-                             span.style.webkitBackgroundClip = 'text';
-                             span.style.webkitTextFillColor = 'transparent';
-                             span.style.backgroundClip = 'text';
-                        }
-                        span.removeEventListener('transitionend', handler); // Clean up listener
-                        
-                        // Once all words for a container are settled, allow its content to wrap normally
-                        // This check can be complex, for simplicity, we'll assume a slight delay after the last word's transition.
-                        // Or, rely on the 'overflow: hidden' on the container which is a compromise.
-                        // A more robust solution might track a count of settled words per container.
-                    });
+                    // **Crucially, we are NOT removing 'position: absolute' or 'transform: none' here.**
+                    // The words will remain absolutely positioned, blurry, and illegible.
+                    // This means they won't be selectable as text in the normal way.
+                    
+                    // Restore original container overflow
+                    setTimeout(() => {
+                        wordContainer.style.overflow = 'visible';
+                    }, SETTLE_DURATION + 500); // A bit after last word has settled
                 });
 
-                // After all words have been scheduled to settle, restore overflow visible on containers
-                // and original elements (which are now replaced by word-containers)
-                textElements.forEach(element => {
-                    const wordContainer = element.parentNode.querySelector('.word-container');
-                    if (wordContainer) {
-                        // Delay this to happen after words have settled and position is static
-                         setTimeout(() => {
-                            wordContainer.style.overflow = 'visible';
-                            // Also ensure original text styling that couldn't be inherited by particles is applied to container
-                            if (element.tagName === 'H1') {
-                                wordContainer.style.background = 'var(--gradient-text)';
-                                wordContainer.style.webkitBackgroundClip = 'text';
-                                wordContainer.style.webkitTextFillColor = 'transparent';
-                                wordContainer.style.backgroundClip = 'text';
-                                wordContainer.style.textShadow = 'var(--glow-primary)';
-                            }
-                         }, SETTLE_DURATION + 500); // A bit after last word has settled
-                    }
-                });
+            }, BOUNCE_DURATION + 500);
 
-            }, BOUNCE_DURATION + 500); // Start settling after bounce duration + a small buffer
-
-            // Add smooth scrolling for any anchor links (kept as is)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
