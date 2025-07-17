@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Maxwell Khavari – AI & Fairness Projects</title>
     <small>Gunn High School 2029</small>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
         :root {
             --bg-primary: #0a0a0a;
@@ -30,12 +30,15 @@
             --spacing-unit: 1rem;
             --border-radius-large: 20px;
             --border-radius-medium: 12px;
-            --transition-speed: 0.4s;
-            --transition-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+            --transition-speed: 0.8s; /* Slower for more fluidity */
+            --transition-ease: cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother easing */
             --shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.2);
             --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
             --glow-primary: 0 0 15px rgba(0, 212, 255, 0.4);
             --glow-secondary: 0 0 15px rgba(124, 58, 237, 0.4);
+
+            /* New text specific variables */
+            --text-shadow-fluid: 0 0 10px rgba(255, 255, 255, 0.05); /* Very subtle white glow */
         }
 
         * {
@@ -52,7 +55,7 @@
             overflow-x: hidden;
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            -moz-osx-smoothing: grayscale;
         }
 
         /* Animated background particles */
@@ -112,7 +115,7 @@
         .floating-github:hover {
             background: var(--accent-primary);
             color: var(--bg-primary);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.02); /* Added slight scale */
             box-shadow: 0 0 35px rgba(0, 212, 255, 0.4); /* Stronger glow */
         }
 
@@ -161,27 +164,26 @@
         header h1 {
             font-family: var(--font-heading);
             font-size: 4.2rem; /* Larger font size */
-            font-weight: 700;
+            font-weight: 800; /* Bolder for impact */
             margin: 0.5rem 0 0.8rem;
             background: var(--gradient-text);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            opacity: 0;
-            animation: fadeInScale 1.8s var(--transition-ease) forwards;
+            /* opacity and animation handled by JS */
             letter-spacing: -0.05em; /* Tighter letter spacing */
-            text-shadow: var(--shadow-glow);
+            text-shadow: var(--glow-primary); /* Use primary glow for main heading */
         }
 
         header p {
             font-size: 1.3rem; /* Larger font size */
             color: var(--text-secondary);
             margin: 0 0 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 1.8s var(--transition-ease) 0.3s forwards;
+            /* opacity and animation handled by JS */
             font-weight: 500;
             max-width: 700px;
             line-height: 1.5;
+            text-shadow: var(--text-shadow-fluid); /* Apply subtle fluid shadow */
         }
 
         .container {
@@ -215,7 +217,7 @@
             height: 4px; /* Thicker border */
             background: var(--gradient-border);
             transform: translateX(-100%);
-            animation: slideInBorder 1.2s var(--transition-ease) 0.6s forwards;
+            animation: slideInBorder 1.2s var(--transition-ease) 0.8s forwards;
         }
 
         section:nth-child(1) { animation-delay: 0.2s; }
@@ -239,9 +241,9 @@
             margin-top: 0;
             margin-bottom: 2rem; /* More space below heading */
             position: relative;
-            opacity: 0;
-            animation: fadeInLeft 1.2s var(--transition-ease) 0.4s forwards;
+            /* opacity and animation handled by JS */
             letter-spacing: -0.03em;
+            text-shadow: var(--text-shadow-fluid);
         }
 
         h2::after {
@@ -252,7 +254,7 @@
             height: 3px; /* Thicker line */
             width: 80px; /* Longer line */
             background: var(--gradient-border);
-            animation: expandLine 1.2s var(--transition-ease) 0.9s forwards;
+            animation: expandLine 1.2s var(--transition-ease) 1.1s forwards;
             transform: scaleX(0);
             transform-origin: left;
         }
@@ -264,16 +266,14 @@
             font-weight: 600;
             margin-top: 2.5rem; /* More space above */
             margin-bottom: 1.2rem;
-            opacity: 0;
-            animation: fadeInUp 1.2s var(--transition-ease) 0.6s forwards;
+            /* opacity and animation handled by JS */
             letter-spacing: 0.01em;
+            text-shadow: var(--text-shadow-fluid);
         }
 
         ul {
             padding-left: 1.8rem; /* More padding */
             margin-top: 0;
-            opacity: 0;
-            animation: fadeInUp 1.2s var(--transition-ease) 0.8s forwards;
             list-style: none; /* Remove default bullet */
         }
 
@@ -283,6 +283,8 @@
             position: relative;
             padding-left: 1.5rem; /* Space for custom bullet */
             font-size: 1.05rem;
+            /* opacity and animation handled by JS */
+            text-shadow: var(--text-shadow-fluid);
         }
 
         ul li::before {
@@ -297,11 +299,11 @@
         p {
             margin-top: 0;
             color: var(--text-secondary);
-            opacity: 0;
-            animation: fadeInUp 1.2s var(--transition-ease) 0.7s forwards;
+            /* opacity and animation handled by JS */
             font-weight: 400;
             font-size: 1.05rem;
             line-height: 1.8;
+            text-shadow: var(--text-shadow-fluid);
         }
 
         a {
@@ -348,6 +350,7 @@
             overflow: hidden;
             font-size: 1.1rem;
             letter-spacing: 0.03em;
+            box-shadow: var(--shadow-subtle); /* Add subtle shadow to buttons */
         }
 
         .projects a::before, .cta-button::before {
@@ -383,7 +386,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: var(--shadow-glow);
+            text-shadow: var(--glow-primary); /* Apply glow to highlights */
         }
 
         .status-update {
@@ -402,6 +405,7 @@
             box-shadow: var(--shadow-subtle);
             font-size: 1.05rem;
             line-height: 1.6;
+            text-shadow: var(--text-shadow-fluid);
         }
 
         .status-update::before {
@@ -424,6 +428,7 @@
             border-top: 1px solid var(--border);
             position: relative;
             line-height: 1.8;
+            text-shadow: var(--text-shadow-fluid);
         }
 
         footer a {
@@ -431,7 +436,65 @@
             font-weight: 600;
         }
 
-        /* Advanced Animations */
+        /* ----- New CSS for Bouncing Words ----- */
+        .word-container {
+            position: relative; /* All parent elements for words need relative positioning */
+            display: block; /* Typically paragraphs and headings are block */
+            line-height: inherit; /* Inherit line-height for proper spacing */
+            font-size: inherit; /* Inherit font-size */
+            font-weight: inherit; /* Inherit font-weight */
+            padding: 0;
+            margin: 0;
+            /* Hide the original text, as word particles will be placed */
+            color: transparent !important; /* Force transparent */
+            /* Crucial: Hide overflow for the bouncing phase */
+            overflow: hidden;
+            /* Ensure the container has a defined height during calculation */
+            min-height: 1em; /* or auto for block elements */
+        }
+        
+        /* Specific styles for word containers that are headings */
+        h1.word-container {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: var(--glow-primary);
+        }
+
+        .word-particle {
+            position: absolute;
+            opacity: 0;
+            transform: translate(0, 0); /* Initial state, will be overwritten by JS */
+            filter: blur(5px); /* Initial blur */
+            /* Add long transition for settling phase */
+            transition: opacity 2s var(--transition-ease),
+                        transform 2s var(--transition-ease),
+                        filter 2s var(--transition-ease);
+            white-space: nowrap; /* Prevent words from breaking */
+            display: inline-block; /* Ensures consistent box model */
+            pointer-events: none; /* Do not block clicks on elements behind */
+            z-index: 100; /* Ensure words are on top during animation */
+            /* Inherit font styles */
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            line-height: inherit;
+            color: inherit; /* Inherit color from the parent container initially */
+            text-shadow: inherit; /* Inherit text shadow */
+        }
+
+        /* Style for highlight words within the word-particle spans */
+        .word-particle.highlight-word {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: var(--glow-primary);
+        }
+
+
+        /* --- Existing Animations (adjusted or retained) --- */
         @keyframes fadeInScale {
             0% {
                 opacity: 0;
@@ -451,17 +514,6 @@
             100% {
                 opacity: 1;
                 transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            0% {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
             }
         }
 
@@ -553,14 +605,16 @@
 
         /* Scroll animations (kept for consistency) */
         @media (prefers-reduced-motion: no-preference) {
+            /* These will be partially overridden by JS-driven animations */
             section {
-                animation: slideInUp 1s ease forwards; /* Original animation for scroll */
+                animation: slideInUp 1s ease forwards;
             }
         }
     </style>
 </head>
 <body>
-    <div class="bg-particles" id="particles"></div>
+
+<div class="bg-particles" id="particles"></div>
 
     <a href="https://github.com/maxwell-khavari" target="_blank" rel="noopener noreferrer" class="floating-github" aria-label="Visit Maxwell Khavari GitHub">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.485 2 12.019c0 4.426 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.343-3.369-1.343-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.031 1.531 1.031.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.114-4.555-4.958 0-1.095.39-1.991 1.029-2.694-.103-.254-.446-1.273.098-2.654 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.845c.85.004 1.705.115 2.504.337 1.908-1.296 2.746-1.026 2.746-1.026.546 1.381.202 2.4.1 2.654.64.703 1.028 1.599 1.028 2.694 0 3.854-2.338 4.7-4.566 4.95.359.309.678.918.678 1.852 0 1.336-.012 2.416-.012 2.744 0 .268.18.58.688.481A10.019 10.019 0 0022 12.019C22 6.485 17.523 2 12 2z"/></svg>
@@ -568,54 +622,54 @@
     </a>
 
     <header>
-        <h1>Maxwell Khavari</h1>
-        <p>AI Researcher • Developer • Gunn High School Student</p>
+        <h1 id="header-h1">Maxwell Khavari</h1>
+        <p id="header-p">AI Researcher • Developer • Gunn High School Student</p>
     </header>
 
     <div class="container">
         <section>
-            <h2>About My Work</h2>
-            <p>
+            <h2 id="section1-h2">About My Work</h2>
+            <p id="section1-p1">
                 My core focus is on understanding and actively addressing algorithmic bias in AI systems — particularly within
                 text-to-image generation and classification models. It's crucial work because these powerful systems, if left
                 unchecked, can inadvertently reinforce harmful stereotypes. My goal is to ensure they become fairer and
                 more representative of our diverse world.
             </p>
-            <p>
+            <p id="section1-p2">
                 My current research delves into how race, gender, and socioeconomic status are represented in AI-generated
                 imagery and within classification tasks. I'm developing methods to reverse-engineer prompts and model decisions,
                 allowing us to thoroughly audit and improve AI fairness.
             </p>
-            <p>
+            <p id="section1-p3">
                 Additionally, I build convolutional neural networks (CNNs), especially for image analysis tasks. I've developed and run small-scale CNN models in Google Colab to experiment with various architectures and datasets.
             </p>
         </section>
 
         <section>
-            <h2>Current Project: Algorithmic Bias Progression Over Time</h2>
-            <h3>The Problem &amp; Opportunity</h3>
-            <ul>
-                <li><strong>Persistent Algorithmic Bias:</strong> Text-to-image AIs generate biased visuals (e.g., for professions, leadership)
+            <h2 id="section2-h2">Current Project: Algorithmic Bias Progression Over Time</h2>
+            <h3 id="section2-h3-1">The Problem &amp; Opportunity</h3>
+            <ul id="section2-ul1">
+                <li id="section2-ul1-li1"><strong>Persistent Algorithmic Bias:</strong> Text-to-image AIs generate biased visuals (e.g., for professions, leadership)
                     even from neutral prompts (e.g., "CEO," "nurse," "leader").
                     These biases stem from vast, real-world datasets that unfortunately carry existing societal biases related to race, gender, status, and intelligence.
                 </li>
-                <li><strong>Temporal Blind Spot:</strong> There's a significant gap in understanding how these biases <span class="highlight">persist and significantly change over time</span> across different model versions.</li>
-                <li><strong>Bias Injection at the Source:</strong> A critical observation is that language models can introduce bias during prompt reconstruction, <em>before</em> the image is generated.</li>
-                <li><strong>Overlooked Human Perception:</strong> Critically, the concept of "bias" isn't uniformly perceived. What an algorithm deems neutral, or what one group finds subtly biased, another might experience as overtly offensive. Relying solely on technical metrics misses this vital human dimension of fairness.</li>
+                <li id="section2-ul1-li2"><strong>Temporal Blind Spot:</strong> There's a significant gap in understanding how these biases <span class="highlight">persist and significantly change over time</span> across different model versions.</li>
+                <li id="section2-ul1-li3"><strong>Bias Injection at the Source:</strong> A critical observation is that language models can introduce bias during prompt reconstruction, <em>before</em> the image is generated.</li>
+                <li id="section2-ul1-li4"><strong>Overlooked Human Perception:</strong> Critically, the concept of "bias" isn't uniformly perceived. What an algorithm deems neutral, or what one group finds subtly biased, another might experience as overtly offensive. Relying solely on technical metrics misses this vital human dimension of fairness.</li>
             </ul>
-            <h3>Our Core Hypothesis</h3>
-            <p>
+            <h3 id="section2-h3-2">Our Core Hypothesis</h3>
+            <p id="section2-p4">
                 Text-to-image models exhibit biases related to socioeconomic status, intelligence, occupational prestige, or leadership, which <span class="highlight">persist and significantly change over time</span>, even when prompts do not explicitly mention gender or race. Furthermore, the human perception and interpretation of these algorithmic biases vary significantly across evaluators from diverse racial and gender backgrounds, revealing distinct subjective experiences of algorithmic fairness.
             </p>
-            <h3>Project Goals</h3>
-            <ul>
-                <li>Quantify the percentage change in gender and racial representation for specific prompts across different model versions over time.</li>
-                <li>Identify and document distinct patterns of algorithmic bias progression (e.g., increasing, decreasing, stable).</li>
-                <li><strong>Quantify the variance in bias perception among human evaluators, demonstrating statistically significant differences based on their racial and gender backgrounds.</strong></li>
-                <li>Generate a robust dataset of over 5,000 images, complete with algorithmic bias metrics and human perception ratings, and make it publicly available.</li>
+            <h3 id="section2-h3-3">Project Goals</h3>
+            <ul id="section2-ul2">
+                <li id="section2-ul2-li1">Quantify the percentage change in gender and racial representation for specific prompts across different model versions over time.</li>
+                <li id="section2-ul2-li2">Identify and document distinct patterns of algorithmic bias progression (e.g., increasing, decreasing, stable).</li>
+                <li id="section2-ul2-li3"><strong>Quantify the variance in bias perception among human evaluators, demonstrating statistically significant differences based on their racial and gender backgrounds.</strong></li>
+                <li id="section2-ul2-li4">Generate a robust dataset of over 5,000 images, complete with algorithmic bias metrics and human perception ratings, and make it publicly available.</li>
             </ul>
             <div class="status-update">
-                <p>
+                <p id="status-p">
                     <strong>Current Status Update:</strong> I'm happy to report that I have most of the automation code and analysis code for the dataset complete. All I need to do is adjust the locators for different models and tweak small parts of it. This means we're in a strong position to generate the data and start the analysis very soon! The groundwork for the human perception study will build directly on these generated images.
                 </p>
             </div>
@@ -623,27 +677,27 @@
         </section>
 
         <section>
-            <h2>Project Components &amp; Methodology Highlights</h2>
-            <h3>Core Domains for Bias Analysis ("Rule of 3")</h3>
-            <ul>
-                <li><strong>Medical &amp; Healthcare Professions:</strong> Examining roles like "nurse," "surgeon," "paramedic" for intersectional bias (prestige, gender coding, racial representation).</li>
-                <li><strong>Patients &amp; Students:</strong> Analyzing depictions of roles often visualized with infantilizing, racialized, or stereotypically passive attributes.</li>
-                <li><strong>Power, Visibility, &amp; Cultural Authority:</strong> Focusing on who appears as leaders, "influencers," "experts," and "icons," probing the sociotechnical biases.</li>
+            <h2 id="section3-h2">Project Components &amp; Methodology Highlights</h2>
+            <h3 id="section3-h3-1">Core Domains for Bias Analysis ("Rule of 3")</h3>
+            <ul id="section3-ul1">
+                <li id="section3-ul1-li1"><strong>Medical &amp; Healthcare Professions:</strong> Examining roles like "nurse," "surgeon," "paramedic" for intersectional bias (prestige, gender coding, racial representation).</li>
+                <li id="section3-ul1-li2"><strong>Patients &amp; Students:</strong> Analyzing depictions of roles often visualized with infantilizing, racialized, or stereotypically passive attributes.</li>
+                <li id="section3-ul1-li3"><strong>Power, Visibility, &amp; Cultural Authority:</strong> Focusing on who appears as leaders, "influencers," "experts," and "icons," probing the sociotechnical biases.</li>
             </ul>
-            <h3>Key Analysis Methods</h3>
-            <ul>
-                <li><strong>Automated Image Generation:</strong> Using "playwright" (Node.js library) to automate generation of 14 prompts, repeated 1008 times, for a large dataset.</li>
-                <li><strong>Automated Bias Analysis:</strong> Using FairFace and/or DeepFace for gender/race/age analysis, calculating proportions, and visualizing trends (Python, Pandas, Seaborn).</li>
-                <li><strong>Human Perception Analysis:</strong> Collecting diverse human judgments on perceived bias to quantify subjective experiences.</li>
-                <li><strong>Direct Bias Evidence (Tier 1):</strong> Capturing visible prompt reconstructions from GPT/DALL-E, and using Stable Diffusion's "Interrogate CLIP" to compare input vs. internal interpretation.</li>
-                <li><strong>Reverse-Engineering Analysis (Tier 2):</strong> Using standalone CLIP Interrogator tools for Midjourney, Gemini/Imagen, DeepAI, and cross-validating with alternative image-to-text models (BLIP-2, InstructBLIP).</li>
+            <h3 id="section3-h3-2">Key Analysis Methods</h3>
+            <ul id="section3-ul2">
+                <li id="section3-ul2-li1"><strong>Automated Image Generation:</strong> Using "playwright" (Node.js library) to automate generation of 14 prompts, repeated 1008 times, for a large dataset.</li>
+                <li id="section3-ul2-li2"><strong>Automated Bias Analysis:</strong> Using FairFace and/or DeepFace for gender/race/age analysis, calculating proportions, and visualizing trends (Python, Pandas, Seaborn).</li>
+                <li id="section3-ul2-li3"><strong>Human Perception Analysis:</strong> Collecting diverse human judgments on perceived bias to quantify subjective experiences.</li>
+                <li id="section3-ul2-li4"><strong>Direct Bias Evidence (Tier 1):</strong> Capturing visible prompt reconstructions from GPT/DALL-E, and using Stable Diffusion's "Interrogate CLIP" to compare input vs. internal interpretation.</li>
+                <li id="section3-ul2-li5"><strong>Reverse-Engineering Analysis (Tier 2):</strong> Using standalone CLIP Interrogator tools for Midjourney, Gemini/Imagen, DeepAI, and cross-validating with alternative image-to-text models (BLIP-2, InstructBLIP).</li>
             </ul>
-            <h3>Expected Impact</h3>
-            <ul>
-                <li>Provides a crucial benchmark dataset and analysis framework for future fairness research in image/video generation.</li>
-                <li>Offers a clear, data-driven picture of how bias has evolved (or persisted) in popular generative models.</li>
-                <li>Provides actionable findings for AI developers, regulators, and users to guide the creation of truly safer, more inclusive tools.</li>
-                <li><strong>Guides the development of fine-tuned models capable of generating images that reflect real-world demographic percentages (e.g., for gender, race) in various contexts.</strong></li>
+            <h3 id="section3-h3-3">Expected Impact</h3>
+            <ul id="section3-ul3">
+                <li id="section3-ul3-li1">Provides a crucial benchmark dataset and analysis framework for future fairness research in image/video generation.</li>
+                <li id="section3-ul3-li2">Offers a clear, data-driven picture of how bias has evolved (or persisted) in popular generative models.</li>
+                <li id="section3-ul3-li3">Provides actionable findings for AI developers, regulators, and users to guide the creation of truly safer, more inclusive tools.</li>
+                <li id="section3-ul3-li4"><strong>Guides the development of fine-tuned models capable of generating images that reflect real-world demographic percentages (e.g., for gender, race) in various contexts.</strong></li>
             </ul>
         </section>
 
@@ -666,33 +720,275 @@
         // Create animated background particles
         function createParticles() {
             const container = document.getElementById('particles');
-            const particleCount = 70; // Increased particle count
+            const particleCount = 70;
 
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 10 + 's'; // Longer delay range
-                particle.style.animationDuration = (Math.random() * 5 + 8) + 's'; // Longer duration range
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 8) + 's';
                 container.appendChild(particle);
             }
         }
 
-        // Initialize particles when page loads
-        window.addEventListener('load', createParticles);
+        // --- JavaScript for Bouncing Words and Settling ---
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles(); // Initialize background particles
 
-        // Add smooth scrolling for any anchor links (kept as is)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+            // Elements that will have their words animated
+            const animatableTextSelectors = 'p, h1, h2, h3, ul li';
+            const textElements = document.querySelectorAll(animatableTextSelectors);
+            const wordDetails = []; // Stores details for each word particle
+            
+            // Define animation durations
+            const BOUNCE_DURATION = 3000; // milliseconds for the random bounce phase
+            const SETTLE_DURATION = 1500; // milliseconds for words to settle into place
+
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            // Step 1: Prepare elements and calculate final positions
+            textElements.forEach(element => {
+                // To handle nested elements like <strong> or <span class="highlight">
+                const originalInnerHTML = element.innerHTML;
+                let tempContent = originalInnerHTML;
+
+                // Replace <strong/highlight> tags with a unique placeholder to split words correctly
+                tempContent = tempContent.replace(/<strong>(.*?)<\/strong>/g, (match, p1) => `!!STRONG_START!!${p1}!!STRONG_END!!`);
+                tempContent = tempContent.replace(/<span class="highlight">(.*?)<\/span>/g, (match, p1) => `!!HIGHLIGHT_START!!${p1}!!HIGHLIGHT_END!!`);
+                tempContent = tempContent.replace(/<em>(.*?)<\/em>/g, (match, p1) => `!!EM_START!!${p1}!!EM_END!!`);
+
+                // Split words by spaces, but keep the placeholders intact
+                const words = tempContent.split(/\s+/).filter(word => word.trim() !== '');
+
+                // Create a temporary container to measure word positions without affecting the main layout
+                const tempMeasurer = document.createElement('div');
+                tempMeasurer.style.position = 'absolute';
+                tempMeasurer.style.visibility = 'hidden';
+                tempMeasurer.style.pointerEvents = 'none';
+                tempMeasurer.style.width = getComputedStyle(element).width; // Important for correct line wrapping
+                tempMeasurer.style.fontFamily = getComputedStyle(element).fontFamily;
+                tempMeasurer.style.fontSize = getComputedStyle(element).fontSize;
+                tempMeasurer.style.fontWeight = getComputedStyle(element).fontWeight;
+                tempMeasurer.style.lineHeight = getComputedStyle(element).lineHeight;
+                tempMeasurer.style.letterSpacing = getComputedStyle(element).letterSpacing;
+                tempMeasurer.style.wordSpacing = getComputedStyle(element).wordSpacing;
+                tempMeasurer.style.padding = getComputedStyle(element).padding;
+                tempMeasurer.style.margin = getComputedStyle(element).margin;
+                tempMeasurer.style.border = getComputedStyle(element).border;
+                tempMeasurer.style.boxSizing = getComputedStyle(element).boxSizing;
+
+
+                // Ensure block elements take space for correct measuring
+                if (getComputedStyle(element).display.includes('block')) {
+                    tempMeasurer.style.display = 'block';
+                } else {
+                    tempMeasurer.style.display = 'inline-block';
                 }
+
+                document.body.appendChild(tempMeasurer);
+
+                // Create a container that will hold the absolutely positioned word spans
+                const wordContainer = document.createElement('div');
+                wordContainer.className = 'word-container';
+                // Copy all computed styles that affect layout and font
+                const computedStyle = getComputedStyle(element);
+                for (let i = 0; i < computedStyle.length; i++) {
+                    const prop = computedStyle[i];
+                    if (prop.startsWith('font') || prop.startsWith('text') || prop.startsWith('line') || prop.startsWith('padding') || prop.startsWith('margin') || prop.startsWith('border') || prop.startsWith('width') || prop.startsWith('height') || prop === 'display' || prop === 'box-sizing') {
+                        wordContainer.style[prop] = computedStyle[prop];
+                    }
+                }
+                wordContainer.style.position = 'relative'; // Crucial for absolute word children
+                wordContainer.style.overflow = 'hidden'; // Hide words outside during bounce
+                wordContainer.style.color = 'transparent'; // Hide original text
+
+                element.parentNode.replaceChild(wordContainer, element); // Replace original element with container
+                element.style.visibility = 'hidden'; // Ensure original element is hidden
+
+                let currentLineHeight = parseFloat(getComputedStyle(element).lineHeight);
+                if (isNaN(currentLineHeight)) { // If 'normal', try to estimate
+                    currentLineHeight = parseFloat(getComputedStyle(element).fontSize) * 1.2;
+                }
+
+                words.forEach((word, index) => {
+                    let processedWord = word;
+                    let isStrong = false;
+                    let isHighlight = false;
+                    let isEm = false;
+
+                    // Restore tags and set flags
+                    if (processedWord.includes('!!STRONG_START!!')) {
+                        processedWord = processedWord.replace('!!STRONG_START!!', '').replace('!!STRONG_END!!', '');
+                        isStrong = true;
+                    }
+                    if (processedWord.includes('!!HIGHLIGHT_START!!')) {
+                        processedWord = processedWord.replace('!!HIGHLIGHT_START!!', '').replace('!!HIGHLIGHT_END!!', '');
+                        isHighlight = true;
+                    }
+                     if (processedWord.includes('!!EM_START!!')) {
+                        processedWord = processedWord.replace('!!EM_START!!', '').replace('!!EM_END!!', '');
+                        isEm = true;
+                    }
+
+                    // For measurement, use a span that reflects the style
+                    const tempWordSpan = document.createElement('span');
+                    tempWordSpan.style.display = 'inline-block'; // Ensure it measures correctly
+                    tempWordSpan.style.whiteSpace = 'nowrap'; // Prevent breaking for measurement
+                    tempWordSpan.textContent = processedWord + (index < words.length - 1 ? ' ' : ''); // Add space back for measurement
+
+                    if (isStrong) tempWordSpan.style.fontWeight = 'bold';
+                    if (isHighlight) tempWordSpan.className = 'highlight-word'; // Just a class for highlighting
+                    if (isEm) tempWordSpan.style.fontStyle = 'italic';
+
+
+                    tempMeasurer.appendChild(tempWordSpan);
+
+                    const rect = tempWordSpan.getBoundingClientRect();
+                    const containerRect = wordContainer.getBoundingClientRect();
+
+                    wordDetails.push({
+                        originalElement: element, // Reference to original element
+                        wordContainer: wordContainer, // The new container for words
+                        text: processedWord,
+                        finalX: rect.left - containerRect.left, // Position relative to its container
+                        finalY: rect.top - containerRect.top,
+                        isStrong: isStrong,
+                        isHighlight: isHighlight,
+                        isEm: isEm,
+                        wordSpan: null // Placeholder for the actual word particle span
+                    });
+
+                    // Add a non-breaking space after each word in the measurer, except the last
+                    // This ensures correct line wrapping and spacing for subsequent words.
+                    if (index < words.length - 1) {
+                         tempMeasurer.appendChild(document.createTextNode(' '));
+                    }
+                });
+                 document.body.removeChild(tempMeasurer); // Clean up the temporary measurer
+            });
+
+            // Step 2: Create actual word particle spans and place them randomly
+            wordDetails.forEach(detail => {
+                const span = document.createElement('span');
+                span.className = 'word-particle';
+                span.textContent = detail.text; // Set text content
+
+                // Apply special styling if it was bold/highlight/italic
+                if (detail.isStrong) span.style.fontWeight = 'bold';
+                if (detail.isHighlight) span.classList.add('highlight-word');
+                if (detail.isEm) span.style.fontStyle = 'italic';
+                
+                // Set initial random position for the "bounce" phase
+                span.style.left = `${Math.random() * (viewportWidth * 1.5) - (viewportWidth * 0.25)}px`; // Wider range for initial scatter
+                span.style.top = `${Math.random() * (viewportHeight * 1.5) - (viewportHeight * 0.25)}px`; // Taller range for initial scatter
+                span.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg) scale(${Math.random() * 0.5 + 0.5})`; // Random rotation and scale
+                span.style.opacity = '0'; // Start invisible
+                span.style.filter = `blur(${Math.random() * 5 + 2}px)`; // Start with more blur
+
+                document.body.appendChild(span); // Add to body for free movement
+                detail.wordSpan = span;
+            });
+
+            // Step 3: Initiate the "bouncing" animation (random floating)
+            // A short delay before starting the random movement phase
+            setTimeout(() => {
+                wordDetails.forEach(detail => {
+                    const span = detail.wordSpan;
+                    const randomDelay = Math.random() * (BOUNCE_DURATION * 0.8); // Stagger start of bounce
+                    span.style.transition = `transform ${BOUNCE_DURATION / 1000}s ease-out ${randomDelay / 1000}s, opacity ${BOUNCE_DURATION / 1000}s ease-out ${randomDelay / 1000}s, filter ${BOUNCE_DURATION / 1000}s ease-out ${randomDelay / 1000}s`;
+                    
+                    // Animate to another random position
+                    span.style.left = `${Math.random() * (viewportWidth * 1.5) - (viewportWidth * 0.25)}px`;
+                    span.style.top = `${Math.random() * (viewportHeight * 1.5) - (viewportHeight * 0.25)}px`;
+                    span.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 720 - 360}deg) scale(${Math.random() * 0.5 + 0.8})`;
+                    span.style.opacity = Math.random() * 0.8 + 0.2; // Random opacity during bounce
+                    span.style.filter = `blur(${Math.random() * 3 + 1}px)`;
+                });
+            }, 100); // Give a small initial delay before moving
+
+            // Step 4: Initiate the "settling" animation
+            setTimeout(() => {
+                wordDetails.forEach((detail, index) => {
+                    const span = detail.wordSpan;
+                    const wordContainer = detail.wordContainer;
+
+                    // Append the word span to its target container
+                    wordContainer.appendChild(span);
+
+                    // Crucially, set position relative to the new parent
+                    const parentOffsetLeft = wordContainer.getBoundingClientRect().left;
+                    const parentOffsetTop = wordContainer.getBoundingClientRect().top;
+                    
+                    // Reset transition to ensure smooth settling from current position
+                    // Use a staggered delay for a more natural settle
+                    const settleDelay = (index * 20) + Math.random() * 200; // Small stagger per word + random
+                    span.style.transition = `transform ${SETTLE_DURATION / 1000}s var(--transition-ease) ${settleDelay / 1000}s, opacity ${SETTLE_DURATION / 1000}s var(--transition-ease) ${settleDelay / 1000}s, filter ${SETTLE_DURATION / 1000}s var(--transition-ease) ${settleDelay / 1000}s`;
+                    
+                    // Animate to the final calculated position relative to its new parent
+                    span.style.left = `${detail.finalX}px`;
+                    span.style.top = `${detail.finalY}px`;
+                    span.style.transform = `translate(0, 0) rotate(0deg) scale(1)`; // Settle to no rotation/scale
+                    span.style.opacity = '1'; // Fully visible
+                    span.style.filter = 'blur(0px)'; // No blur
+
+                    // After the transition, revert to static positioning for proper text flow and selection
+                    span.addEventListener('transitionend', function handler() {
+                        span.style.position = 'static';
+                        span.style.transform = 'none'; // Remove transform to allow normal flow and sizing
+                        span.style.transition = 'none'; // Remove transition for normal operation
+                        // Re-apply highlight background if necessary (CSS might override 'color: inherit' if it's a gradient)
+                        if (detail.isHighlight) {
+                             span.style.background = 'var(--gradient-text)';
+                             span.style.webkitBackgroundClip = 'text';
+                             span.style.webkitTextFillColor = 'transparent';
+                             span.style.backgroundClip = 'text';
+                        }
+                        span.removeEventListener('transitionend', handler); // Clean up listener
+                        
+                        // Once all words for a container are settled, allow its content to wrap normally
+                        // This check can be complex, for simplicity, we'll assume a slight delay after the last word's transition.
+                        // Or, rely on the 'overflow: hidden' on the container which is a compromise.
+                        // A more robust solution might track a count of settled words per container.
+                    });
+                });
+
+                // After all words have been scheduled to settle, restore overflow visible on containers
+                // and original elements (which are now replaced by word-containers)
+                textElements.forEach(element => {
+                    const wordContainer = element.parentNode.querySelector('.word-container');
+                    if (wordContainer) {
+                        // Delay this to happen after words have settled and position is static
+                         setTimeout(() => {
+                            wordContainer.style.overflow = 'visible';
+                            // Also ensure original text styling that couldn't be inherited by particles is applied to container
+                            if (element.tagName === 'H1') {
+                                wordContainer.style.background = 'var(--gradient-text)';
+                                wordContainer.style.webkitBackgroundClip = 'text';
+                                wordContainer.style.webkitTextFillColor = 'transparent';
+                                wordContainer.style.backgroundClip = 'text';
+                                wordContainer.style.textShadow = 'var(--glow-primary)';
+                            }
+                         }, SETTLE_DURATION + 500); // A bit after last word has settled
+                    }
+                });
+
+            }, BOUNCE_DURATION + 500); // Start settling after bounce duration + a small buffer
+
+            // Add smooth scrolling for any anchor links (kept as is)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
             });
         });
     </script>
